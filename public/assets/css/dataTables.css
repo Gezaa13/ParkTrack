@@ -1,0 +1,14 @@
+.dataTables_filter input {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+.page-item.active .page-link {
+    background-color: #1e3a8a !important;
+    color: white !important;
+    border-color: #1e3a8a !important;
+}
+.page-item .page-link {
+    color: black !important;
+}

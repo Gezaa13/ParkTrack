@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class User extends Model
+{
+    protected $table         = 'user';
+    protected $primaryKey    = 'id_user';
+    protected $allowedFields = [
+        'nama_lengkap',
+        'username',
+        'password',
+        'role',
+        'status_aktif'
+    ];
+    protected $returnType    = 'array';
+}

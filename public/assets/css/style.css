@@ -1,0 +1,41 @@
+.full-screen {
+  height: 100vh;
+}
+
+.bg-white-opacity-25 {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.bg-blue-1 {
+  background-color: #1e3a8a !important;
+}
+.bg-blue-2 {
+  background-color: #1d4ed8 !important;
+}
+
+.bg-blue-hover{
+  background-color: #1d4ed8 !important;
+  transition: ease-in-out 0.5s;
+}
+.bg-blue-hover:hover{
+  background-color: #1e3a8a !important;
+}
+
+.progress-bar-blue-1 {
+  --bs-progress-bar-bg: #1e3a8a;
+}
+
+.btn-hover-white {
+  background-color: rgba(255, 255, 255, 0.25);
+  transition: ease-in-out 0.25s;
+  color: white;
+}
+.btn-hover-white:hover {
+  background-color: rgba(255, 255, 255);
+  color: #1e3a8a;
+}
+
+.border-login {
+  border: 0px solid white;
+  border-bottom: 1px solid white !important;
+}
