@@ -8,9 +8,9 @@
 #include <WiFi.h>
 
 // Konfigurasi Wifi
-const char* ssid = "HISAN RAMADHAN PUTRA";
-const char* password = "DeltaCatus";
-const char* mqtt_server = "10.48.72.202";
+const char* ssid = "YOUR WIFI NAME";
+const char* password = "YOUR WIFI PASWORD";
+const char* mqtt_server = "broker.hivemq.com / YOUR IP ADDRESS";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -44,6 +44,10 @@ void connect() {
     Serial.print("Connecting MQTT...");
     Serial.print("MQTT state: ");
     Serial.println(client.state());
+		display.clearDisplay();
+    display.setCursor(0, 0);
+    display.println("Mohon tunggu sebentar...");
+    display.display();
 
     if (client.connect("esp32-client")) {
       Serial.println("MQTT Connected");
@@ -88,6 +92,13 @@ void setup() {
 
   Serial.begin(115200);
 
+  // Inisialisasi OLED
+  if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
+    Serial.println("OLED tidak terdeteksi");
+    while (true)
+      ;
+  }
+
   // Koneksi Wi-Fi
   WiFi.begin(ssid, password);
 
@@ -111,20 +122,11 @@ void setup() {
   rfidEntry.PCD_Init();
   rfidExit.PCD_Init();
 
-  // Inisialisasi OLED
-  if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
-    Serial.println("OLED tidak terdeteksi");
-    while (true)
-      ;
-  }
-
   // Kondisi awal OLED
   display.clearDisplay();
   display.setCursor(0, 0);
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.println("Silahkan tempel kartuAnda");
-  display.display();
 
   // Hubungkan servo
   servoEntry.attach(32, 500, 2400);
@@ -139,8 +141,17 @@ void loop() {
   // Koneksi Client
   if (!client.connected()) {
     connect();
+		display.clearDisplay();
+		display.setCursor(0, 0);
+		display.println("Mohon tunggu sebentar...");
+		display.display();
   }
   client.loop();
+
+	display.clearDisplay();
+	display.setCursor(0, 0);
+	display.println("Silahkan tempel kartuAnda");
+	display.display();
 
   // RFID Entry
   if (rfidEntry.PICC_IsNewCardPresent() && rfidEntry.PICC_ReadCardSerial()) {
